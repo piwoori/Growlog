@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int          @id @default(autoincrement())
+  email      String       @unique
+  password   String
+  nickname   String       @unique @default("user")
+  role       String       @default("USER")
+  createdAt  DateTime     @default(now())
+
+  todos       Todo[]
+  reflections Reflection[]
+  emotions    Emotion[]
+}
+
+model Todo {
+  id        Int      @id @default(autoincrement())
+  content   String
+  isDone    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+}
+
+model Reflection {
+  id         Int       @id @default(autoincrement())
+  userId     Int
+  content    String
+  createdAt  DateTime  @default(now())
+  emotionId  Int?      @unique
+
+  user       User      @relation(fields: [userId], references: [id])
+  emotion    Emotion?  @relation(fields: [emotionId], references: [id])
+
+  @@index([userId])
+}
+
+model Emotion {
+  id         Int       @id @default(autoincrement())
+  userId     Int
+  emoji      String
+  date       DateTime  @default(now())
+  reflection Reflection?
+
+  user       User      @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date]) // 같은 날짜에 한 번만 기록 가능
+  @@index([userId])
+}
