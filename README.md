@@ -24,7 +24,7 @@
 | ORM | Prisma |
 | 인증 | JWT (Access / Refresh) |
 | 문서화 | Swagger (OpenAPI) |
-| 배포 | Render 또는 Railway (예정) |
+| 배포 | Render 또는 Railway |
 
 ---
 

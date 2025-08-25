@@ -35,6 +35,7 @@ model Reflection {
   content    String
   createdAt  DateTime  @default(now())
   emotionId  Int?      @unique
+  date       DateTime  @default(now())
 
   user       User      @relation(fields: [userId], references: [id])
   emotion    Emotion?  @relation(fields: [emotionId], references: [id])
@@ -51,6 +52,6 @@ model Emotion {
 
   user       User      @relation(fields: [userId], references: [id])
 
-  @@unique([userId, date]) // 같은 날짜에 한 번만 기록 가능
+  @@unique([userId, date], name: "userId_date")
   @@index([userId])
 }
