@@ -30,7 +30,6 @@
 
 ## 🗂️ 폴더 구조
 
-```
 growlog-backend/
 ├── app.js
 ├── .env.example
@@ -42,7 +41,6 @@ growlog-backend/
 ├── /docs
 │   └── swagger.yaml
 └── /utils
-```
 
 ---
 
