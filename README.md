@@ -56,7 +56,7 @@ cd growlog
 # 3. 패키지 설치
 npm install
 
-# 4. .env 파일 생성 (.env.example 참고해서 작성)
+# 4. .env 파일 생성
 cp .env.example .env
 
 # 5. DB 마이그레이션
